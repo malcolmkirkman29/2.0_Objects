@@ -27,7 +27,9 @@ public class BasicGameApp implements Runnable {
    //Variable Definition Section
    //Declare the variables used in the program 
    //You can set their initial values too
-   
+
+	int randomY = (int)(Math.random()*10)+1;
+
    //Sets the width and height of the program window
 	final int WIDTH = 1000;
 	final int HEIGHT = 700;
@@ -43,6 +45,7 @@ public class BasicGameApp implements Runnable {
    //Declare the objects used in the program
    //These are things that are made up of more than one variable type
 	private Astronaut astro;
+	private Astronaut astro2;
 
 
    // Main method definition
@@ -65,6 +68,7 @@ public class BasicGameApp implements Runnable {
       //create (construct) the objects needed for the game and load up 
 		astroPic = Toolkit.getDefaultToolkit().getImage("astronaut.png"); //load the picture
 		astro = new Astronaut(10,100);
+		astro2 = new Astronaut(10,100);
 
 
 	}// BasicGameApp()
@@ -80,6 +84,9 @@ public class BasicGameApp implements Runnable {
 	public void run() {
 
       //for the moment we will loop things forever.
+
+		System.out.println(randomY);
+
 		while (true) {
 
          moveThings();  //move all the game objects
@@ -92,7 +99,9 @@ public class BasicGameApp implements Runnable {
 	public void moveThings()
 	{
       //calls the move( ) code in the objects
-		astro.move();
+
+		astro.move(10,5);
+		astro2.move(10,randomY);
 
 	}
 	
@@ -145,6 +154,7 @@ public class BasicGameApp implements Runnable {
 
       //draw the image of the astronaut
 		g.drawImage(astroPic, astro.xpos, astro.ypos, astro.width, astro.height, null);
+		g.drawImage(astroPic, astro2.xpos, astro2.ypos, astro2.width, astro2.height, null);
 
 
 		//end coding here
