@@ -109,11 +109,28 @@ public class BasicGameApp implements Runnable {
 		astro.move(10,5);
 		astro2.move(10,randomDY);
 		astro3.move(randomDX, randomDY);
+		crashing();
 
 
 	}
-	
-   //Pauses or sleeps the computer for the amount specified in milliseconds
+
+	private void crashing(){
+		if(astro.hitbox.intersects(astro2.hitbox) && astro.isCrashing == false){
+			System.out.println("Crash");
+			astro.width = astro.width + 50;
+			astro.height = astro.height + 50;
+			astro2.width = astro.width + 50;
+			astro2.height = astro.height + 50;
+
+			astro.dy = astro.dy+4;
+			astro.isCrashing = true;
+		}
+		if(!astro.hitbox.intersects(astro2.hitbox)){
+			astro.isCrashing = false;
+		}
+	}
+
+	//Pauses or sleeps the computer for the amount specified in milliseconds
    public void pause(int time ){
    		//sleep
 			try {
@@ -163,7 +180,10 @@ public class BasicGameApp implements Runnable {
       //draw the image of the astronaut
 		g.drawImage(astroPic, astro.xpos, astro.ypos, astro.width, astro.height, null);
 		g.drawImage(astroPic, astro2.xpos, astro2.ypos, astro2.width, astro2.height, null);
-		g.drawImage(astroPic, astro3.xpos, astro2.ypos, astro2.width, astro2.height, null);
+		g.drawImage(astroPic, astro3.xpos, astro3.ypos, astro3.width, astro3.height, null);
+		g.drawRect(astro.hitbox.x, astro.hitbox.y, astro.hitbox.width, astro.hitbox.height);
+		g.drawRect(astro2.hitbox.x, astro2.hitbox.y, astro2.hitbox.width, astro2.hitbox.height);
+		g.drawRect(astro3.hitbox.x, astro3.hitbox.y, astro3.hitbox.width, astro3.hitbox.height);
 
 
 
