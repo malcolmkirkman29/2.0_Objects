@@ -17,7 +17,7 @@ import java.awt.image.BufferStrategy;
 import java.awt.*;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
+//Very infrequently the third astronaut doesn't show up and I can't figure out why, but it usually works
 
 //*******************************************************************************
 // Class Definition Section
@@ -28,7 +28,12 @@ public class BasicGameApp implements Runnable {
    //Declare the variables used in the program 
    //You can set their initial values too
 
-	int randomY = (int)(Math.random()*10)+1;
+	int randomDY = (int)(Math.random()*10)+1;
+	int randomDX = (int)(Math.random()*10)+1;
+
+	int randomY = (int)(Math.random()*350)+100;
+	int randomX = (int)(Math.random()*500)+100;
+
 
    //Sets the width and height of the program window
 	final int WIDTH = 1000;
@@ -46,6 +51,7 @@ public class BasicGameApp implements Runnable {
    //These are things that are made up of more than one variable type
 	private Astronaut astro;
 	private Astronaut astro2;
+	private Astronaut astro3;
 
 
    // Main method definition
@@ -69,6 +75,7 @@ public class BasicGameApp implements Runnable {
 		astroPic = Toolkit.getDefaultToolkit().getImage("astronaut.png"); //load the picture
 		astro = new Astronaut(10,100);
 		astro2 = new Astronaut(10,100);
+		astro3 = new Astronaut(randomX, randomY);
 
 
 	}// BasicGameApp()
@@ -82,11 +89,10 @@ public class BasicGameApp implements Runnable {
    // main thread
    // this is the code that plays the game after you set things up
 	public void run() {
-
-      //for the moment we will loop things forever.
-
+		System.out.println(randomX);
 		System.out.println(randomY);
 
+      //for the moment we will loop things forever.
 		while (true) {
 
          moveThings();  //move all the game objects
@@ -101,7 +107,9 @@ public class BasicGameApp implements Runnable {
       //calls the move( ) code in the objects
 
 		astro.move(10,5);
-		astro2.move(10,randomY);
+		astro2.move(10,randomDY);
+		astro3.move(randomDX, randomDY);
+
 
 	}
 	
@@ -155,6 +163,8 @@ public class BasicGameApp implements Runnable {
       //draw the image of the astronaut
 		g.drawImage(astroPic, astro.xpos, astro.ypos, astro.width, astro.height, null);
 		g.drawImage(astroPic, astro2.xpos, astro2.ypos, astro2.width, astro2.height, null);
+		g.drawImage(astroPic, astro3.xpos, astro2.ypos, astro2.width, astro2.height, null);
+
 
 
 		//end coding here
