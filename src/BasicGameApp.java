@@ -74,7 +74,7 @@ public class BasicGameApp implements Runnable {
       //create (construct) the objects needed for the game and load up 
 		astroPic = Toolkit.getDefaultToolkit().getImage("astronaut.png"); //load the picture
 		astro = new Astronaut(10,100);
-		astro2 = new Astronaut(10,100);
+		astro2 = new Astronaut(500,500);
 		astro3 = new Astronaut(randomX, randomY);
 
 
@@ -106,29 +106,145 @@ public class BasicGameApp implements Runnable {
 	{
       //calls the move( ) code in the objects
 
-		astro.move(10,5);
-		astro2.move(10,randomDY);
-		astro3.move(randomDX, randomDY);
+		astro.move(20,10);
+		astro2.move(20,randomDY*2);
+		astro3.move(randomDX*2, randomDY*2);
 		crashing();
 
 
 	}
 
 	private void crashing(){
-		if(astro.hitbox.intersects(astro2.hitbox) && astro.isCrashing == false){
-			System.out.println("Crash");
-			astro.width = astro.width + 50;
-			astro.height = astro.height + 50;
-			astro2.width = astro.width + 50;
-			astro2.height = astro.height + 50;
-
-			astro.dy = astro.dy+4;
-			astro.isCrashing = true;
-		}
+		//Collision for astro and astro2
 		if(!astro.hitbox.intersects(astro2.hitbox)){
 			astro.isCrashing = false;
 		}
+
+		if(astro.hitbox.intersects(astro2.hitbox) && astro.isCrashing == false) {
+
+			//Getting bigger
+//			astro.width = astro.width + 50;
+//			astro.height = astro.height + 50;
+//			astro2.width = astro.width + 50;
+//			astro2.height = astro.height + 50;
+
+			//Speeding up
+//			if (astro.dy > 0) {
+//				astro.dy = astro.dy + 1;
+//				astro2.dy = astro2.dy + 1;
+//			}
+//			if (astro.dy < 0) {
+//				astro.dy = astro.dy - 1;
+//				astro2.dy = astro2.dy - 1;
+//			}
+//
+//			if (astro.dx > 0) {
+//				astro.dx = astro.dx + 1;
+//				astro2.dx = astro2.dx + 1;
+//			}
+//			if(astro.dx<0){
+//			astro.dx = astro.dx - 1;
+//			astro2.dx = astro2.dx - 1;
+//			}
+
+			//Bouncing off eachother
+			astro.dy = -astro.dy;
+			astro.dx = -astro.dx;
+			astro2.dy = -astro2.dy;
+			astro2.dx = -astro2.dx;
+
+
+			astro.isCrashing = true;
+
+		}
+
+		//Collision for astro2 and astro3
+		if(!astro2.hitbox.intersects(astro3.hitbox)){
+			astro2.isCrashing = false;
+		}
+
+		if(astro2.hitbox.intersects(astro3.hitbox) && astro2.isCrashing == false) {
+
+			//Getting bigger
+//			astro.width = astro.width + 50;
+//			astro.height = astro.height + 50;
+//			astro2.width = astro.width + 50;
+//			astro2.height = astro.height + 50;
+
+			//Speeding up
+//			if (astro2.dy > 0) {
+//				astro2.dy = astro2.dy + 1;
+//				astro3.dy = astro3.dy + 1;
+//			}
+//			if (astro2.dy < 0) {
+//				astro2.dy = astro2.dy - 1;
+//				astro3.dy = astro3.dy - 1;
+//			}
+//
+//			if (astro2.dx > 0) {
+//				astro2.dx = astro2.dx + 1;
+//				astro3.dx = astro3.dx + 1;
+//			}
+//			if(astro2.dx<0){
+//				astro2.dx = astro2.dx - 1;
+//				astro3.dx = astro3.dx - 1;
+//			}
+
+			//Bouncing off eachother
+			astro2.dy = -astro2.dy;
+			astro2.dx = -astro2.dx;
+			astro3.dy = -astro3.dy;
+			astro3.dx = -astro3.dx;
+
+
+			astro2.isCrashing = true;
+
+		}
+
+		//Collision for astro1 and astro3
+		if(!astro.hitbox.intersects(astro3.hitbox)){
+			astro3.isCrashing = false;
+		}
+
+		if(astro.hitbox.intersects(astro3.hitbox) && astro3.isCrashing == false) {
+
+			//Getting bigger
+//			astro.width = astro.width + 50;
+//			astro.height = astro.height + 50;
+//			astro2.width = astro.width + 50;
+//			astro2.height = astro.height + 50;
+
+			//Speeding up
+//			if (astro.dy > 0) {
+//				astro.dy = astro.dy + 1;
+//				astro3.dy = astro3.dy + 1;
+//			}
+//			if (astro.dy < 0) {
+//				astro.dy = astro.dy - 1;
+//				astro3.dy = astro3.dy - 1;
+//			}
+//
+//			if (astro.dx > 0) {
+//				astro.dx = astro.dx + 1;
+//				astro3.dx = astro3.dx + 1;
+//			}
+//			if(astro.dx<0){
+//				astro.dx = astro.dx - 1;
+//				astro3.dx = astro3.dx - 1;
+//			}
+
+			//Bouncing off eachother
+			astro.dy = -astro.dy;
+			astro.dx = -astro.dx;
+			astro3.dy = -astro3.dy;
+			astro3.dx = -astro3.dx;
+
+
+			astro3.isCrashing = true;
+		}
 	}
+
+
 
 	//Pauses or sleeps the computer for the amount specified in milliseconds
    public void pause(int time ){
