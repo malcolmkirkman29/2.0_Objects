@@ -46,6 +46,7 @@ public class BasicGameApp implements Runnable {
    
 	public BufferStrategy bufferStrategy;
 	public Image astroPic;
+	public Image galaxyPic;
 
    //Declare the objects used in the program
    //These are things that are made up of more than one variable type
@@ -76,6 +77,8 @@ public class BasicGameApp implements Runnable {
 		astro = new Astronaut(10,100);
 		astro2 = new Astronaut(500,500);
 		astro3 = new Astronaut(randomX, randomY);
+
+		galaxyPic = Toolkit.getDefaultToolkit().getImage("Galaxy.jpg");
 
 
 	}// BasicGameApp()
@@ -120,7 +123,9 @@ public class BasicGameApp implements Runnable {
 			astro.isCrashing = false;
 		}
 
-		if(astro.hitbox.intersects(astro2.hitbox) && astro.isCrashing == false) {
+		if(astro.hitbox.intersects(astro2.hitbox) && astro.isCrashing == false && astro2.isAlive == true) {
+			//Make astro2 die
+			astro2.isAlive = false;
 
 			//Getting bigger
 //			astro.width = astro.width + 50;
@@ -154,6 +159,8 @@ public class BasicGameApp implements Runnable {
 			astro2.dx = -astro2.dx;
 
 
+
+
 			astro.isCrashing = true;
 
 		}
@@ -163,7 +170,7 @@ public class BasicGameApp implements Runnable {
 			astro2.isCrashing = false;
 		}
 
-		if(astro2.hitbox.intersects(astro3.hitbox) && astro2.isCrashing == false) {
+		if(astro2.hitbox.intersects(astro3.hitbox) && astro2.isCrashing == false && astro2.isAlive == true) {
 
 			//Getting bigger
 //			astro.width = astro.width + 50;
@@ -294,14 +301,15 @@ public class BasicGameApp implements Runnable {
 		//start coding from here
 
       //draw the image of the astronaut
+		g.drawImage(galaxyPic, 0, 0, WIDTH, HEIGHT, null);
 		g.drawImage(astroPic, astro.xpos, astro.ypos, astro.width, astro.height, null);
-		g.drawImage(astroPic, astro2.xpos, astro2.ypos, astro2.width, astro2.height, null);
+		if(astro2.isAlive == true){
+			g.drawImage(astroPic, astro2.xpos, astro2.ypos, astro2.width, astro2.height, null);
+			g.drawRect(astro2.hitbox.x, astro2.hitbox.y, astro2.hitbox.width, astro2.hitbox.height);
+		}
 		g.drawImage(astroPic, astro3.xpos, astro3.ypos, astro3.width, astro3.height, null);
 		g.drawRect(astro.hitbox.x, astro.hitbox.y, astro.hitbox.width, astro.hitbox.height);
-		g.drawRect(astro2.hitbox.x, astro2.hitbox.y, astro2.hitbox.width, astro2.hitbox.height);
 		g.drawRect(astro3.hitbox.x, astro3.hitbox.y, astro3.hitbox.width, astro3.hitbox.height);
-
-
 
 		//end coding here
 		g.dispose();
